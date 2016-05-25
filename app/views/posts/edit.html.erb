@@ -65,18 +65,43 @@
     	
     	<div class="row">
     		<div class="col-md-12">
-	    		<p>
-					<strong>Title:</strong>
-					<%= @post.title %>
-				</p>
+	    		<h1>Edit Post</h1>
 
-				<p>
-					<strong>Test:</strong>
-					<%= @post.text %>
-				</p>
+				<%=form_for :post, url: posts_path(@post), method: :patch do |f| %>
 
-				<%= link_to 'Go back', posts_path, class: "btn btn-large btn-success" %>
+					<% if @post.errors.any? %>
+						<div id="error_explaination">
+							<h2>
+								<%= pluralize(@post.errors.count, "error") %> in saving your Post:
+							</h2>
+							<ul>
+								<% @post.errors.full_messages.each do |msg| %>
+								<li> <%= msg %> </li>
+								<% end %>
+							</ul>
+						</div>
+					<% end %>
+					<p>
+						<%= f.label :title %><br>
+						<%= f.text_field :title %>
+					</p>
+
+					<p> 
+						<%= f.label :text %><br>
+						<%= f.text_field :text %>
+					</p>
+
+					<p> 
+					<%= button_tag(type: 'submit', class: "btn btn-success") do %>
+ 						<i class="icon-ok icon-white"></i> Save
+ 						<% end %>
+					</p>
+
+				<% end %>
+
+				<%= link_to 'Go Back', posts_path, class: "btn btn-large btn-danger" %>
 			</div>
+		</div>
     </div>
 
     
