@@ -67,7 +67,7 @@
     		<div class="col-md-12">
 	    		<h1>Edit Post</h1>
 
-				<%=form_for :post, url: posts_path(@post), method: :patch do |f| %>
+				<%=form_for :post, url: post_path(@post), method: :patch do |f| %>
 
 					<% if @post.errors.any? %>
 						<div id="error_explaination">
