@@ -50,11 +50,11 @@
         <!-- end header here -->
         <div class="collapse navbar-collapse" id="navbar">
           <ul class ="nav navbar-nav navbar-right"> <!-- unordered list -->
-            <li><%= link_to 'Home', root_path%></li>
+            <li class="active"><a href="#">Home</a></li>
             <li><a href="#">About</a></li>
-          </ul>
-          <p class="navbar-text pull-right">
-          <% if user_signed_in? %>
+            <p class="navbar-text pull-right">
+            </ul>
+            <% if user_signed_in? %>
               Logged in as <strong><%= current_user.email %></strong>.
               <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
               <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
@@ -62,43 +62,36 @@
               <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
               <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
             <% end %>
+          
            
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
 
-    
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+
     
     <div class="container">
       
       <div class="row">
         <div class="col-md-12">
-          <h3>Exhibitions:</h3>
-            <table>
-              <tr>
-                <th>Title</th>
-                <th>Text</th>
-                <th colspan="2"></th>
-              </tr>
-
-              <% @posts.each do |post| %>
-              <tr>
-                <td><%= post.title %></td>
-                <td><%= post.text %></td>
-                <td><%= link_to 'Show', post_path(post), class: "btn btn-xsmall btn-success" %></td>
-                <td><%= link_to 'Edit', edit_post_path(post), class: "btn btn-xsmall btn-success" %></td>
-                <td><%= link_to 'Delete', post_path(post), method: :delete, data: {confirm: 'Are you sure you with to delete this post?' }, class: "btn btn-xsmall btn-success" %></td>
-
-              </tr>
-              <% end %>
-            </table>
-            <%= link_to 'Create a New Post', new_post_path, class: "btn btn-large btn-success" %>
-
-        </div>
+         <%= form_for(:user, :url => {:controller => 'users', :action => 'create'}) do |f| %>
+            <p> Username:<br> <%= f.text_field :username%></p>
+            <p> Email:<br> <%= f.text_field :email%></p>
+            <p> Password:<br> <%= f.password_field :encrypted_password%></p>
+            <p> Password Confirmation:<br> <%= f.password_field :password_confirmation%></p>
+            <%= f.submit :Signup, class: "btn btn-large btn-success" %>
+          <% end %>
+          <% if @user.errors.any? %>
+            <ul class = "Signup Errors">
+              <% for message_error in @user.errors.full_messages %>
+              <li>* <%= message_error %></li>
+            <% end %>
+            </ul>
+          <% end %>
       </div>
     </div>
 
-    
     
 
      <hr>
