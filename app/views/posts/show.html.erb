@@ -75,6 +75,14 @@
 					<%= @post.text %>
 				</p>
 
+				<h2>Comments:</h2>
+				<%= render @post.comments %>
+
+				<h2>Add a Comment:</h2>
+
+				<%= render 'comments/form' %>
+
+				<%= link_to 'Edit', edit_post_path, class: "btn btn-large btn-success" %>
 				<%= link_to 'Go back', posts_path, class: "btn btn-large btn-success" %>
 			</div>
     </div>

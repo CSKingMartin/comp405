@@ -1,0 +1,17 @@
+<%=form_for([@post, @post.comments.build]) do |f| %>
+					<p>	
+						<%= f.label :commenter %>
+						<%= f.text_field :commenter %>
+					</p>
+					<p>
+						<%= f.label :body %>
+						<%= f.text_field :body %>
+					</p>
+
+					<p> 
+					<%= button_tag(type: 'submit', class: "btn btn-success") do %>
+ 						<i class="icon-ok icon-white"></i> Save
+ 						<% end %>
+					</p>
+
+				<% end %>
